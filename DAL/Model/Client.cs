@@ -11,6 +11,7 @@ namespace DAL.Model
         }
 
 
+
         public int ID_Client { get; set; }
         public string ClientName { get; set; }
 
