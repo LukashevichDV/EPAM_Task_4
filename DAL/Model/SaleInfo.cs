@@ -2,9 +2,8 @@
 
 namespace DAL.Model
 {
-    public partial class SaleInfo
+    public partial class SaleInfo : Entity.Entity
     {
-        public int ID_Sale { get; set; }
         public string SaleDate { get; set; }
         public Nullable<int> ID_Manager { get; set; }
         public Nullable<int> ID_Client { get; set; }

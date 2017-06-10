@@ -1,5 +1,4 @@
-﻿using DAL.Entity;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
 namespace DAL.Model
@@ -9,12 +8,15 @@ namespace DAL.Model
         public ManagersContext()
             : base("name=ManagersContext")
         {
+
         }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
+
 
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Manager> Manager { get; set; }

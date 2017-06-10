@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Client.cs" />
+    <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\Manager.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Entity\SaleInfo.cs" />
@@ -83,9 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Repository\AbstructRepository.cs" />
-    <Compile Include="Repository\ClientRepository.cs" />
-    <Compile Include="Repository\IModelRepository.cs" />
+    <Compile Include="Repository\CommonRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

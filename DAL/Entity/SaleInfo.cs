@@ -2,9 +2,8 @@
 
 namespace DAL.Entity
 {
-    public class SaleInfo
+    public class SaleInfo : Entity
     {
-        public int ID_Sale { get; set; }
         public string SaleDate { get; set; }
         public Nullable<int> ID_Manager { get; set; }
         public Nullable<int> ID_Client { get; set; }

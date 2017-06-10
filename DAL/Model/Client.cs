@@ -1,9 +1,8 @@
-﻿using DAL.Entity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DAL.Model
 {
-    public partial class Client
+    public partial class Client : Entity.Entity
     {
         public Client()
         {
@@ -11,10 +10,7 @@ namespace DAL.Model
         }
 
 
-
-        public int ID_Client { get; set; }
         public string ClientName { get; set; }
-
         public virtual ICollection<SaleInfo> SaleInfo { get; set; }
     }
 }

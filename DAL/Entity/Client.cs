@@ -1,8 +1,7 @@
 ﻿namespace DAL.Entity
 {
-    public class Client
+    public class Client : Entity
     {
-        public int ID_Client { get; set; }
         public string ClientName { get; set; }
     }
 }
