@@ -84,7 +84,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\AbsructRepositiry.cs" />
+    <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\CommonRepository.cs" />
+    <Compile Include="Repository\IModelRepository.cs" />
+    <Compile Include="Repository\ManagerRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\SaleInfoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

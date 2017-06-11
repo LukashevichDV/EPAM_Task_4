@@ -11,6 +11,7 @@ namespace DAL.Model
 
 
         public string ClientName { get; set; }
+        public int ID_Client { get;  set; }
         public virtual ICollection<SaleInfo> SaleInfo { get; set; }
     }
 }
