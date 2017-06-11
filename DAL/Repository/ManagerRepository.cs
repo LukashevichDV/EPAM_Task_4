@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class ManagerRepository : AbstractRepository, IModelRepository<DAL.Entity.Manager, Model.Manager>
+    public class ManagerRepository : AbstractRepository, IModelRepository<Entity.Manager, Model.Manager>
     {
-        Model.Manager ToEntity(DAL.Entity.Manager source)
+        Model.Manager ToEntity(Entity.Manager source)
         {
             return new Model.Manager()
             {
@@ -16,35 +14,35 @@ namespace DAL.Repository
             };
         }
 
-        DAL.Entity.Manager ToObject(Model.Manager source)
+        Entity.Manager ToObject(Model.Manager source)
         {
-            return new DAL.Entity.Manager()
+            return new Entity.Manager()
             {
                 ManagerName = source.ManagerName
             };
         }
 
-        public Model.Manager GetEntity(DAL.Entity.Manager source)
+        public Model.Manager GetEntity(Entity.Manager source)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == source.ManagerName);
+            var entity = managersContext.Manager.FirstOrDefault(x => x.ManagerName == source.ManagerName);
             return entity;
         }
 
         public Model.Manager GetEntityNameById(int id)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ID_Manager == id);
+            var entity = managersContext.Manager.FirstOrDefault(x => x.ID_Manager == id);
             return entity;
         }
 
-        public void Add(DAL.Entity.Manager item)
+        public void Add(Entity.Manager item)
         {
-            var entity = this.ToEntity(item);
+            var entity = ToEntity(item);
             managersContext.Manager.Add(entity);
         }
 
-        public void Remove(DAL.Entity.Manager item)
+        public void Remove(Entity.Manager item)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ID_Manager == item.ID_Manager);
+            var entity = managersContext.Manager.FirstOrDefault(x => x.ID_Manager == item.ID_Manager);
             if (entity != null)
             {
                 managersContext.Manager.Remove(entity);
@@ -55,9 +53,9 @@ namespace DAL.Repository
             }
         }
 
-        public void Update(DAL.Entity.Manager item)
+        public void Update(Entity.Manager item)
         {
-            var entity = this.managersContext.Manager.FirstOrDefault(x => x.ManagerName == item.ManagerName);
+            var entity = managersContext.Manager.FirstOrDefault(x => x.ManagerName == item.ManagerName);
             if (entity != null)
             {
                 entity.ManagerName = item.ManagerName;
@@ -68,16 +66,15 @@ namespace DAL.Repository
             }
         }
 
-        public IEnumerable<DAL.Entity.Manager> Items
+        public IEnumerable<Entity.Manager> Items
         {
             get
             {
-                var b = new List<DAL.Entity.Manager>();
-                foreach (var a in this.managersContext.Manager.Select(x => x))
+                var b = new List<Entity.Manager>();
+                foreach (var a in managersContext.Manager.Select(x => x))
                 {
                     b.Add(ToObject(a));
                 }
-
                 return b;
             }
         }

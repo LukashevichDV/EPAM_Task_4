@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class SaleInfoRepository : AbstractRepository, IModelRepository<DAL.Entity.SaleInfo, Model.SaleInfo>
+    public class SaleInfoRepository : AbstractRepository, IModelRepository<Entity.SaleInfo, Model.SaleInfo>
     {
-        Model.SaleInfo ToEntity(DAL.Entity.SaleInfo source)
+        Model.SaleInfo ToEntity(Entity.SaleInfo source)
         {
             return new Model.SaleInfo()
             {
@@ -19,9 +17,9 @@ namespace DAL.Repository
             };
         }
 
-        DAL.Entity.SaleInfo ToObject(Model.SaleInfo source)
+        Entity.SaleInfo ToObject(Model.SaleInfo source)
         {
-            return new DAL.Entity.SaleInfo()
+            return new Entity.SaleInfo()
             {
                 SaleDate = source.SaleDate,
                 ID_Manager = source.ID_Manager,
@@ -30,27 +28,27 @@ namespace DAL.Repository
             };
         }
 
-        public Model.SaleInfo GetEntity(DAL.Entity.SaleInfo source)
+        public Model.SaleInfo GetEntity(Entity.SaleInfo source)
         {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == source.ID_Sale);
+            var entity = managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == source.ID_Sale);
             return entity;
         }
 
         public Model.SaleInfo GetEntityNameById(int id)
         {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == id);
+            var entity = managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == id);
             return entity;
         }
 
-        public void Add(DAL.Entity.SaleInfo item)
+        public void Add(Entity.SaleInfo item)
         {
-            var entity = this.ToEntity(item);
+            var entity = ToEntity(item);
             managersContext.SaleInfo.Add(entity);
         }
 
-        public void Remove(DAL.Entity.SaleInfo item)
+        public void Remove(Entity.SaleInfo item)
         {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
+            var entity = managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
             if (entity != null)
             {
                 managersContext.SaleInfo.Remove(entity);
@@ -61,9 +59,9 @@ namespace DAL.Repository
             }
         }
 
-        public void Update(DAL.Entity.SaleInfo item)
+        public void Update(Entity.SaleInfo item)
         {
-            var entity = this.managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
+            var entity = managersContext.SaleInfo.FirstOrDefault(x => x.ID_Sale == item.ID_Sale);
             if (entity != null)
             {
                 entity.SaleDate = item.SaleDate;
@@ -77,12 +75,12 @@ namespace DAL.Repository
             }
         }
 
-        public IEnumerable<DAL.Entity.SaleInfo> Items
+        public IEnumerable<Entity.SaleInfo> Items
         {
             get
             {
-                var b = new List<DAL.Entity.SaleInfo>();
-                foreach (var a in this.managersContext.SaleInfo.Select(x => x))
+                var b = new List<Entity.SaleInfo>();
+                foreach (var a in managersContext.SaleInfo.Select(x => x))
                 {
                     b.Add(ToObject(a));
                 }

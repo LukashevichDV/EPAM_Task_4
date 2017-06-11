@@ -6,41 +6,45 @@ namespace WindowService
 {
     public class Watcher
     {
-        private RecordsHandler _recordsHandler;
-        private FileSystemWatcher _fileWatcher;
+        private RecordsHandler RecordsHandler;
+        private FileSystemWatcher FileWatcher;
         private Task task;
 
         public Watcher()
         {
-            _recordsHandler = new RecordsHandler();
-            _fileWatcher = new FileSystemWatcher();
-            _fileWatcher.Path = ConfigurationManager.AppSettings["Path"];
-            _fileWatcher.Filter = "*.csv";
-            _fileWatcher.NotifyFilter = NotifyFilters.FileName;
+            RecordsHandler = new RecordsHandler();
+            FileWatcher = new FileSystemWatcher
+            {
+                Path = ConfigurationManager.AppSettings["Path"],
+                Filter = "*.csv",
+                NotifyFilter = NotifyFilters.FileName
+            };
 
-            _fileWatcher.Changed += new FileSystemEventHandler(OnChanged);
-            _fileWatcher.Created += new FileSystemEventHandler(OnChanged);
-            _fileWatcher.EnableRaisingEvents = true;
+            FileWatcher.Changed += OnChanged;
+            FileWatcher.Created += OnChanged;
+            FileWatcher.EnableRaisingEvents = true;
         }
 
-        public void run()
+        public void Run()
         {
 
         }
+
         public void OnChanged(object source, FileSystemEventArgs e)
         {
             task = new Task(() => CallParse(source, e));
             task.Start();
         }
+
         public void CallParse(object source, FileSystemEventArgs e)
         {
-            string path;
-            path = e.FullPath;
-            _recordsHandler.SaveRecords(path);
+            var path = e.FullPath;
+            RecordsHandler.SaveRecords(path);
         }
+
         public void Dispose()
         {
-            _fileWatcher.Dispose();
+            FileWatcher.Dispose();
         }
     }
 }

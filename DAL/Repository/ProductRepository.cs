@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class ProductRepository : AbstractRepository, IModelRepository<DAL.Entity.Product, Model.Product>
+    public class ProductRepository : AbstractRepository, IModelRepository<Entity.Product, Model.Product>
     {
-        Model.Product ToEntity(DAL.Entity.Product source)
+        Model.Product ToEntity(Entity.Product source)
         {
             return new Model.Product()
             {
@@ -17,36 +15,36 @@ namespace DAL.Repository
             };
         }
 
-        DAL.Entity.Product ToObject(Model.Product source)
+        Entity.Product ToObject(Model.Product source)
         {
-            return new DAL.Entity.Product()
+            return new Entity.Product()
             {
                 ProductName = source.ProductName,
                 ProductCost = source.ProductCost
             };
         }
 
-        public Model.Product GetEntity(DAL.Entity.Product source)
+        public Model.Product GetEntity(Entity.Product source)
         {
-            var entity = this.managersContext.Product.FirstOrDefault(x => x.ProductName == source.ProductName && x.ProductCost == source.ProductCost);
+            var entity = managersContext.Product.FirstOrDefault(x => x.ProductName == source.ProductName && x.ProductCost == source.ProductCost);
             return entity;
         }
 
         public Model.Product GetEntityNameById(int id)
         {
-            var entity = this.managersContext.Product.FirstOrDefault(x => x.ID_Product == id);
+            var entity = managersContext.Product.FirstOrDefault(x => x.ID_Product == id);
             return entity;
         }
 
-        public void Add(DAL.Entity.Product item)
+        public void Add(Entity.Product item)
         {
-            var entity = this.ToEntity(item);
+            var entity = ToEntity(item);
             managersContext.Product.Add(entity);
         }
 
-        public void Remove(DAL.Entity.Product item)
+        public void Remove(Entity.Product item)
         {
-            var entity = this.managersContext.Product.FirstOrDefault(x => x.ID_Product == item.ID_Product);
+            var entity = managersContext.Product.FirstOrDefault(x => x.ID_Product == item.ID_Product);
             if (entity != null)
             {
                 managersContext.Product.Remove(entity);
@@ -57,9 +55,9 @@ namespace DAL.Repository
             }
         }
 
-        public void Update(DAL.Entity.Product item)
+        public void Update(Entity.Product item)
         {
-            var entity = this.managersContext.Product.FirstOrDefault(x => x.ID_Product == item.ID_Product);
+            var entity = managersContext.Product.FirstOrDefault(x => x.ID_Product == item.ID_Product);
             if (entity != null)
             {
                 entity.ProductName = item.ProductName;
@@ -71,11 +69,11 @@ namespace DAL.Repository
             }
         }
 
-        public IEnumerable<DAL.Entity.Product> Items
+        public IEnumerable<Entity.Product> Items
         {
             get
             {
-                return this.managersContext.Product.Select(x => this.ToObject(x));
+                return managersContext.Product.Select(x => ToObject(x));
             }
         }
 

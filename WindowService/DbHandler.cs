@@ -4,17 +4,17 @@ namespace WindowService
 {
     public class DbHandler
     {
-        private IModelRepository<DAL.Entity.Manager, DAL.Model.Manager> _managerRepository;
-        private IModelRepository<DAL.Entity.Client, DAL.Model.Client> _clientRepository;
-        private IModelRepository<DAL.Entity.Product, DAL.Model.Product> _productRepository;
-        private IModelRepository<DAL.Entity.SaleInfo, DAL.Model.SaleInfo> _saleInfoRepository;
+        private IModelRepository<DAL.Entity.Manager, DAL.Model.Manager> ManagerRepository;
+        private IModelRepository<DAL.Entity.Client, DAL.Model.Client> ClientRepository;
+        private IModelRepository<DAL.Entity.Product, DAL.Model.Product> ProductRepository;
+        private IModelRepository<DAL.Entity.SaleInfo, DAL.Model.SaleInfo> SaleInfoRepository;
 
         public DbHandler()
         {
-            _managerRepository = new ManagerRepository();
-            _clientRepository = new CilentRepository();
-            _productRepository = new ProductRepository();
-            _saleInfoRepository = new SaleInfoRepository();
+            ManagerRepository = new ManagerRepository();
+            ClientRepository = new CilentRepository();
+            ProductRepository = new ProductRepository();
+            SaleInfoRepository = new SaleInfoRepository();
         }
 
         public void AddToDatabase(Journal journal)
@@ -22,23 +22,23 @@ namespace WindowService
             lock (this)
             {
                 var newManager = new DAL.Entity.Manager { ManagerName = journal.ManagerName };
-                var manager = _managerRepository.GetEntity(newManager);
+                var manager = ManagerRepository.GetEntity(newManager);
                 if (manager == null)
                 {
-                    _managerRepository.Add(newManager);
-                    _managerRepository.SaveChanges();
-                    manager = _managerRepository.GetEntity(newManager);
+                    ManagerRepository.Add(newManager);
+                    ManagerRepository.SaveChanges();
+                    manager = ManagerRepository.GetEntity(newManager);
                 }
 
                 var newClient = new DAL.Entity.Client { ClientName = journal.ClientName };
-                _clientRepository.Add(newClient);
-                _clientRepository.SaveChanges();
-                var client = _clientRepository.GetEntity(newClient);
+                ClientRepository.Add(newClient);
+                ClientRepository.SaveChanges();
+                var client = ClientRepository.GetEntity(newClient);
 
                 var newProduct = new DAL.Entity.Product { ProductName = journal.ProductName, ProductCost = journal.ProductCost };
-                _productRepository.Add(newProduct);
-                _productRepository.SaveChanges();
-                var product = _productRepository.GetEntity(newProduct);
+                ProductRepository.Add(newProduct);
+                ProductRepository.SaveChanges();
+                var product = ProductRepository.GetEntity(newProduct);
 
                 var saleInfo = new DAL.Entity.SaleInfo
                 {
@@ -47,8 +47,8 @@ namespace WindowService
                     ID_Client = client.ID_Client,
                     ID_Product = product.ID_Product
                 };
-                _saleInfoRepository.Add(saleInfo);
-                _saleInfoRepository.SaveChanges();
+                SaleInfoRepository.Add(saleInfo);
+                SaleInfoRepository.SaveChanges();
             }
         }
     }

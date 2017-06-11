@@ -2,19 +2,20 @@
 {
     public class RecordsHandler
     {
-        private DbHandler _dbHandler;
-        private Parser _parser;
+        private DbHandler DbHandler;
+        private Parser Parser;
         public RecordsHandler()
         {
-            _dbHandler = new DbHandler();
-            _parser = new Parser();
+            DbHandler = new DbHandler();
+            Parser = new Parser();
         }
+
         public void SaveRecords(string path)
         {
-            var records = _parser.ParseData(path);
+            var records = Parser.ParseData(path);
             foreach (var record in records)
             {
-                _dbHandler.AddToDatabase(record);
+                DbHandler.AddToDatabase(record);
             }
         }
     }

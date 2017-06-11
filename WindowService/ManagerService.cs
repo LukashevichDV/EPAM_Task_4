@@ -4,7 +4,7 @@ namespace WindowService
 {
     public partial class ManagerService : ServiceBase
     {
-        private Watcher _watcher;
+        private Watcher Watcher;
         public ManagerService()
         {
             InitializeComponent();
@@ -12,12 +12,12 @@ namespace WindowService
 
         protected override void OnStart(string[] args)
         {
-            _watcher = new Watcher();
+            Watcher = new Watcher();
         }
 
         protected override void OnStop()
         {
-            _watcher.Dispose();
+            Watcher.Dispose();
         }
     }
 }

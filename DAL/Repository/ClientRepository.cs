@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class CilentRepository : AbstractRepository, IModelRepository<DAL.Entity.Client, Model.Client>
+    public class CilentRepository : AbstractRepository, IModelRepository<Entity.Client, Model.Client>
     {
-        Model.Client ToEntity(DAL.Entity.Client source)
+        Model.Client ToEntity(Entity.Client source)
         {
             return new Model.Client()
             {
@@ -16,15 +14,15 @@ namespace DAL.Repository
             };
         }
 
-        DAL.Entity.Client ToObject(Model.Client source)
+        Entity.Client ToObject(Model.Client source)
         {
-            return new DAL.Entity.Client()
+            return new Entity.Client()
             {
                 ClientName = source.ClientName
             };
         }
 
-        public Model.Client GetEntity(DAL.Entity.Client source)
+        public Model.Client GetEntity(Entity.Client source)
         {
             var entity = this.managersContext.Client.FirstOrDefault(x => x.ClientName == source.ClientName);
             return entity;
@@ -32,19 +30,19 @@ namespace DAL.Repository
 
         public Model.Client GetEntityNameById(int id)
         {
-            var entity = this.managersContext.Client.FirstOrDefault(x => x.ID_Client == id);
+            var entity = managersContext.Client.FirstOrDefault(x => x.ID_Client == id);
             return entity;
         }
 
-        public void Add(DAL.Entity.Client item)
+        public void Add(Entity.Client item)
         {
-            var entity = this.ToEntity(item);
+            var entity = ToEntity(item);
             managersContext.Client.Add(entity);
         }
 
-        public void Remove(DAL.Entity.Client item)
+        public void Remove(Entity.Client item)
         {
-            var entity = this.managersContext.Client.FirstOrDefault(x => x.ID_Client == item.ID_Client);
+            var entity = managersContext.Client.FirstOrDefault(x => x.ID_Client == item.ID_Client);
             if (entity != null)
             {
                 managersContext.Client.Remove(entity);
@@ -55,9 +53,9 @@ namespace DAL.Repository
             }
         }
 
-        public void Update(DAL.Entity.Client item)
+        public void Update(Entity.Client item)
         {
-            var entity = this.managersContext.Client.FirstOrDefault(x => x.ID_Client == item.ID_Client);
+            var entity = managersContext.Client.FirstOrDefault(x => x.ID_Client == item.ID_Client);
             if (entity != null)
             {
                 entity.ClientName = item.ClientName;
@@ -72,7 +70,7 @@ namespace DAL.Repository
         {
             get
             {
-                return this.managersContext.Client.Select(x => this.ToObject(x));
+                return managersContext.Client.Select(x => this.ToObject(x));
             }
         }
 
